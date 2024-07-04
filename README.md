@@ -4,4 +4,4 @@
 
 Feature | Branch | Detail
 --- | --- | --- 
-First HCL| first_branch | Simple HCL code 
+First HCL| [first_hcl](https://github.com/ishan65/gcpterraform/tree/first_hcl) | Simple HCL code 

@@ -1,0 +1,5 @@
+*tfstate*
+*.json
+code/.terraform*
+code/.terraform/*
+code/*tfstate*

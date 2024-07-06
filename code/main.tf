@@ -4,7 +4,7 @@ resource "google_compute_address" "compute_external_ip" {
 
 
 data "google_compute_image" "ubuntu_image" {
-  family  = "ubuntu-2004-lts-arm64"
+  family  = "ubuntu-2004-lts"
   project = "ubuntu-os-cloud"
 }
 
@@ -13,7 +13,7 @@ resource "google_compute_instance" "compute01" {
   name         = "compute01"
   machine_type = "e2-standard-2"
   zone         = "us-central1-a"
-  tags = ["compute"]
+
   boot_disk {
     initialize_params {
       image = data.google_compute_image.ubuntu_image.self_link
@@ -29,7 +29,6 @@ resource "google_compute_instance" "compute01" {
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 }
-
 
 output "external_ip" {
   value = google_compute_address.compute_external_ip.address

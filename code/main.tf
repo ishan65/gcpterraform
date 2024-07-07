@@ -61,6 +61,14 @@ resource "google_compute_instance" "compute01" {
   }
 }
 
+
+resource "google_compute_project_metadata" "gcp_ssh_key" {
+  metadata = {
+    ssh-keys = "gcptera:${file(var.ssh_key)}"
+  }
+}
+
+
 output "external_ip" {
   value = google_compute_address.compute_external_ip.address
 }

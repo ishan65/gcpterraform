@@ -1,6 +1,6 @@
 variable "gcp_region" {
-  type = string
-  default = "us-central1"
+  type = list(string)
+  default = ["us-central1", "europe-west1", "us-west1"]
 }
 
 variable "gcp_project" {

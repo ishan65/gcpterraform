@@ -3,7 +3,8 @@ data "google_compute_image" "ubuntu_image" {
   project = "ubuntu-os-cloud"
 }
 
- data "google_compute_zones" "zone_info" {
+
+data "google_compute_zones" "zone_info" {
 }
 
 
@@ -12,17 +13,15 @@ resource "google_compute_network" "vpc_network01" {
   auto_create_subnetworks = false
 }
 
+
 resource "google_compute_address" "compute_external_ip" {
-  count = length(data.google_compute_zones.zone_info.names)
-  name = "myip-${data.google_compute_zones.zone_info.names[count.index]}"
+  name = "myip"
 }
 
 
 resource "google_compute_subnetwork" "network-with-private-ip-ranges" {
-  count = length(data.google_compute_zones.zone_info.names)
-
-  name          = "${data.google_compute_zones.zone_info.names[count.index]}-subnetwork"
-  ip_cidr_range = "10.0.${count.index}.0/24"
+  name          = "${var.gcp_region[0]}-subnetwork"
+  ip_cidr_range = "10.0.1.0/24"
   region        = var.gcp_region[0]
   network       = google_compute_network.vpc_network01.id
 }
@@ -44,11 +43,11 @@ resource "google_compute_firewall" "firewall01" {
 }
 
 resource "google_compute_instance" "compute01" {
-  count = length(data.google_compute_zones.zone_info.names)
+  count = 1
 
-  name         = "compute0${count.index}-${data.google_compute_zones.zone_info.names[count.index]}"
+  name         = "compute0${count.index}-${var.gcp_region[0]}"
   machine_type = "e2-standard-2"
-  zone         = "${data.google_compute_zones.zone_info.names[count.index]}"
+  zone         = "${data.google_compute_zones.zone_info.names[0]}"
   tags         = ["compute"]
 
   boot_disk {
@@ -59,12 +58,14 @@ resource "google_compute_instance" "compute01" {
 
   network_interface {
     network    = google_compute_network.vpc_network01.self_link
-    subnetwork = "${google_compute_subnetwork.network-with-private-ip-ranges[count.index].self_link}"
+    subnetwork = "${google_compute_subnetwork.network-with-private-ip-ranges.self_link}"
 
     access_config {
-      nat_ip = "${google_compute_address.compute_external_ip[count.index].address}"
+      nat_ip = "${google_compute_address.compute_external_ip.address}"
     }
   }
+
+  metadata_startup_script = "echo hi > /test.txt"
 
   service_account {
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
@@ -82,9 +83,3 @@ resource "google_compute_project_metadata" "gcp_ssh_key" {
 output "external_ip" {
   value = google_compute_address.compute_external_ip[*].address
 }
-
-
-output "zoneinfo" {
-  value = data.google_compute_zones.zone_info.names
-}
-

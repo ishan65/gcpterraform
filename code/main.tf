@@ -65,7 +65,9 @@ resource "google_compute_instance" "compute01" {
     }
   }
 
-  metadata_startup_script = file("./start_script.sh")
+  provisioner "local-exec" {
+    command = file("./start_script.sh")
+  }
 
   service_account {
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]

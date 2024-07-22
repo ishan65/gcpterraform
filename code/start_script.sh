@@ -1,4 +1,4 @@
-apt update
-apt install -y apache2
+sudo apt-get update
+sudo apt install -y apache2
 echo "IXT65 $(date) - $(hostname -i)" > /var/www/html/index.html
-systemctl restart apache2
+sudo systemctl restart apache2

@@ -17,3 +17,8 @@ variable "ssh_key" {
  type = string
  default = "/root/.ssh/id_gcptera.pub"
 }
+
+variable "priv_ssh_key" {
+ type = string
+ default = "/root/.ssh/id_gcptera"
+}

@@ -65,19 +65,8 @@ resource "google_compute_instance" "compute01" {
     }
   }
 
-  provisioner "remote-exec" {
-    connection {
-      type = "ssh"
-      private_key = file(var.priv_ssh_key)
-      user = "gcptera"
-      host = "${google_compute_address.compute_external_ip.address}"
-    }
-    inline = [
-      "sudo apt-get update",
-      "sudo apt install -y apache2",
-      "sudo echo IXT65 `date` > 1.txt",
-      "sudo systemctl restart apache2",
-    ]
+  provisioner "local-exec" {
+    command = "echo IXT ${google_compute_address.compute_external_ip.address} > local.txt"
   }
 
   service_account {

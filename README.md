@@ -15,4 +15,4 @@ Compute with simple startup script with custom VPC| [8_compute_startup_script](h
 Compute with complex startup script with custom VPC| [9_compute_startup_script_complex](https://github.com/ishan65/gcpterraform/tree/9_compute_startup_script_complex) | Spin a compute resource in the Custom VPC with startup script in different file
 Compute with custom VPC and remote exec Provisioner| [10_compute_remote_exec](https://github.com/ishan65/gcpterraform/tree/10_compute_remote_exec) | Spin a compute resource in the Custom VPC with remote exec provisioner
 Compute with custom VPC and local exec Provisioner| [11_compute_local_exec](https://github.com/ishan65/gcpterraform/tree/11_compute_local_exec) | Spin a compute resource in the Custom VPC with local exec provisioner
-
+Compute with custom VPC in module |[12_compute_module](https://github.com/ishan65/gcpterraform/tree/12_compute_module) | Spin a compute resource in the Custom VPC using module

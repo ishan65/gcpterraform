@@ -1,6 +1,6 @@
 variable "gcp_region" {
   type = list(string)
-  default = ["us-central1", "europe-west1", "us-west1"]
+  default = ["europe-west1", "us-central1", "us-west1"]
 }
 
 variable "gcp_project" {
@@ -21,4 +21,9 @@ variable "ssh_key" {
 variable "priv_ssh_key" {
  type = string
  default = "/root/.ssh/id_gcptera"
+}
+
+variable "vpc_network" {
+  type = string
+  default = "vpc-network01"
 }

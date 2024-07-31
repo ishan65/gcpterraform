@@ -3,3 +3,7 @@
 code/.terraform*
 code/.terraform/*
 code/*tfstate*
+
+code/usage/example1/.terraform*
+code/usage/example1/.terraform/*
+code/usage/example1/*tfstate*

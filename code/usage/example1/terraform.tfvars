@@ -1,0 +1,15 @@
+gcp_key = "../../../learn-426012-199996f158be.json"
+gcp_project = "learn-426012"
+priv_ssh_key = "/root/.ssh/id_gcptera"
+ssh_key = "/root/.ssh/id_gcptera.pub"
+compute_num = 1
+gcp_user = "gcptera"
+gcp_tag = ["compute"]
+gcp_firewall_name = "firewall01"
+gcp_region = "us-central1"
+vpc_network = "vpc01"
+gcp_compute_name = "compute"
+subnet_auto_create = false
+gcp_subnet_name = "subnet"
+ip_cidr_range = "10.0.1.0/24"
+external_ip_name = "myip"

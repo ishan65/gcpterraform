@@ -1,9 +1,14 @@
+locals {
+  selected_region = var.gcp_region[2]
+}
+
 data "google_compute_image" "ubuntu_image" {
    family  = "ubuntu-2004-lts"
   project = "ubuntu-os-cloud"
 }
 
  data "google_compute_zones" "zone_info" {
+  region = local.selected_region
 }
 
 
@@ -15,6 +20,7 @@ resource "google_compute_network" "vpc_network01" {
 resource "google_compute_address" "compute_external_ip" {
   count = length(data.google_compute_zones.zone_info.names)
   name = "myip-${data.google_compute_zones.zone_info.names[count.index]}"
+  region = local.selected_region
 }
 
 
@@ -23,7 +29,7 @@ resource "google_compute_subnetwork" "network-with-private-ip-ranges" {
 
   name          = "${data.google_compute_zones.zone_info.names[count.index]}-subnetwork"
   ip_cidr_range = "10.0.${count.index}.0/24"
-  region        = var.gcp_region[0]
+  region        = local.selected_region
   network       = google_compute_network.vpc_network01.id
 }
 

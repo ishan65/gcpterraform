@@ -5,12 +5,12 @@ variable "gcp_region" {
 
 variable "gcp_project" {
   type = string
-  default = "learn-426012"
+  default = "psychic-heading-456716-b1"
 }
 
 variable "gcp_key" {
   type = string
-  default = "../learn-426012-199996f158be.json"
+  default = "../psychic-heading-456716-b1-fb1ad3d7bc57.json"
 }
 
 variable "ssh_key" {
